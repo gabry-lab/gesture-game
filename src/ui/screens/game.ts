@@ -89,7 +89,7 @@ export function mountGame(root: HTMLElement, params: PlayParams): () => void {
     const dpr = Math.min(2, window.devicePixelRatio || 1)
     canvas.width = Math.round(r.width * dpr)
     canvas.height = Math.round(r.height * dpr)
-    // 用 CSS 像素作绘制坐标系，保证与 object-fit:cover 的视频坐标精确对齐
+    // 用 CSS 像素作绘制坐标系，保证与 object-fit:contain 的视频坐标精确对齐
     canvas.getContext('2d')!.setTransform(dpr, 0, 0, dpr, 0, 0)
   }
   sizeCanvas()
@@ -360,9 +360,9 @@ export function mountGame(root: HTMLElement, params: PlayParams): () => void {
     ctx.clearRect(0, 0, w, h)
     const frame = latestFrame
     if (!frame || video.videoWidth === 0) return
-    // object-fit: cover 映射 + 镜像
+    // object-fit:contain 映射 + 镜像
     const vw = video.videoWidth, vh = video.videoHeight
-    const sc = Math.max(w / vw, h / vh)
+    const sc = Math.min(w / vw, h / vh)
     const ox = (w - vw * sc) / 2
     const oy = (h - vh * sc) / 2
     const mx = (x: number, y: number): [number, number] => [

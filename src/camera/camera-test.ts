@@ -1,7 +1,7 @@
 /**
  * 相机实时测试屏：验证 PosePipeline 全链路
  * - 镜像视频 + 骨架叠加 + FPS + 状态
- * 画布用 CSS 像素坐标系 + DPR 缩放，与 object-fit:cover 的视频坐标精确对齐。
+ * 画布用 CSS 像素坐标系 + DPR 缩放，与 object-fit:contain 的视频坐标精确对齐。
  */
 import { PosePipeline } from './pipeline'
 import { drawSkeleton } from './skeleton-draw'
@@ -59,9 +59,9 @@ export function mountCameraTest(root: HTMLElement): () => void {
     ctx.clearRect(0, 0, w, h)
     const frame = pipeline.lastFrame
     if (!frame || video.videoWidth === 0) return
-    // object-fit:cover 映射 + 镜像
+    // object-fit:contain 映射 + 镜像
     const vw = video.videoWidth, vh = video.videoHeight
-    const sc = Math.max(w / vw, h / vh)
+    const sc = Math.min(w / vw, h / vh)
     const ox = (w - vw * sc) / 2
     const oy = (h - vh * sc) / 2
     const mirrored: PoseFrame = {}
