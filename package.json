@@ -1,0 +1,22 @@
+{
+  "name": "kidz-move",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "儿童律动健身 App — 基于 vladmandic/human 骨骼姿态匹配",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@vladmandic/human": "^3.3.6"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2",
+    "vite": "^8.3.3",
+    "vitest": "^5.0.3"
+  }
+}
